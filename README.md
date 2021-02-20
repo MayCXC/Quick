@@ -1,5 +1,3 @@
-[[中文]](./README_cn.md)
-
 # Mwifi Router Example
 
 ## Introduction
