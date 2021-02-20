@@ -28,11 +28,6 @@ Enter `make menuconfig`, and configure the followings under the submenu "Example
  * ESP-WIFI-MESH network: The network password length should be between 8 and 64 bits (both exclusive), and the network will not be encrypted if you leave the password blank.
  * TCP server: the information of the TCP server run on the PC
 
-<div align=center>
-<img src="device_config.png"  width="800">
-<p> Configure the devices </p>
-</div>
-
 ### Build and Flash
 
 Make:
@@ -51,11 +46,6 @@ idf.py erase_flash flash monitor-b 921600 -p /dev/ttyUSB0
 2. The TCP server sends data (in as format describe in the following section) to a specific address or group address:
 	-  	When the destination address is `ff:ff:ff:ff:ff:ff`, it will send data to all devices.
 	-  When the destination is a group address, it will send data to all the devices in this group.
-
-<div align=center>
-<img src="tcp_server.png"  width="500">
-<p> TCP server </p>
-</div>
 
 ### Data Format
 
