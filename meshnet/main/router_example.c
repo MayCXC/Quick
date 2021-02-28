@@ -154,7 +154,10 @@ void tcp_client_write_task(void *arg)
     char *data    = MDF_CALLOC(1, MWIFI_PAYLOAD_LEN);
     size_t size   = MWIFI_PAYLOAD_LEN;
     uint8_t src_addr[MWIFI_ADDR_LEN] = {0x0};
-    mwifi_data_type_t data_type      = {0x0};
+    mwifi_data_type_t data_type      = {
+        .compression = true,
+        .communicate = MWIFI_COMMUNICATE_UNICAST,
+    };
 
     MDF_LOGI("TCP client write task is running");
 
@@ -217,7 +220,10 @@ static void node_write_task(void *arg)
     int count                       = 0;
     char *data                      = NULL;
     mdf_err_t ret                   = MDF_OK;
-    mwifi_data_type_t data_type     = {0};
+    mwifi_data_type_t data_type     = {
+        .compression = true,
+        .communicate = MWIFI_COMMUNICATE_UNICAST,
+    };
     uint8_t sta_mac[MWIFI_ADDR_LEN] = {0};
 
     MDF_LOGI("NODE task is running");
@@ -230,7 +236,7 @@ static void node_write_task(void *arg)
             continue;
         }
 
-        size = asprintf(&data, "{\"src_addr\": \"" MACSTR "\",\"data\": \"Hello TCP Server!\",\"count\": %d}",
+        size = asprintf(&data, "{\"src_addr\": \"" MACSTR "\",\"data\": \"Hello TCP Server!\",\"count\": %d}\n",
                         MAC2STR(sta_mac), count++);
 
         MDF_LOGD("Node send, size: %d, data: %s", size, data);
@@ -346,10 +352,12 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
 
         case MDF_EVENT_MWIFI_ROOT_GOT_IP: {
             MDF_LOGI("Root obtains the IP address. It is posted by LwIP stack automatically");
+        
             xTaskCreate(tcp_client_write_task, "tcp_client_write_task", 4 * 1024,
                         NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
             xTaskCreate(tcp_client_read_task, "tcp_server_read", 4 * 1024,
                         NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
+        
             break;
         }
 
