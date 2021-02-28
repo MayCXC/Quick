@@ -53,7 +53,7 @@ defmodule Quick do
   defp serve(socket) do
     socket
     |> read_line()
-    |> write_line(socket)
+#   |> write_line(socket)
 
     serve(socket)
   end
@@ -64,7 +64,7 @@ defmodule Quick do
     data
   end
 
-  defp write_line(line, socket) do
-    :gen_tcp.send(socket, line)
-  end
+#  defp write_line(line, socket) do
+#    :gen_tcp.send(socket, line)
+#  end
 end
