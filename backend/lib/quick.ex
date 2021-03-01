@@ -4,13 +4,7 @@ defmodule Quick do
   """
 
   @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Quick.hello()
-      :world
-
+  TCP server with WebSocket mirror.
   """
   require Logger
 
@@ -21,7 +15,12 @@ defmodule Quick do
     Supervisor.start_link(
       [
         { Task.Supervisor, name: Quick.TaskSupervisor },
-        Supervisor.child_spec({Task, fn -> accept(4040) end}, restart: :permanent)
+        Supervisor.child_spec({Task, fn -> accept(4040) end}, restart: :permanent),
+        Plug.Cowboy.child_spec(
+          scheme: :http,
+          plug: nil,
+          options: [port: 8080, dispatch: dispatch()]
+        )
       ],
       strategy: :one_for_one,
       name: Quick.Supervisor
@@ -36,35 +35,51 @@ defmodule Quick do
     # 3. `active: false` - blocks on `:gen_tcp.recv/2` until data is available
     # 4. `reuseaddr: true` - allows us to reuse the address if the listener crashes
     #
-    {:ok, socket} =
-      :gen_tcp.listen(port, [:binary, packet: :line, active: false, reuseaddr: true])
-    Logger.info("Accepting connections on port #{port}")
-    loop_acceptor(socket)
+    {:ok, socket} = :gen_tcp.listen port, [
+      mode: :binary,
+      packet: :line,
+      active: false,
+      reuseaddr: true
+    ]
+    Logger.info "Accepting connections on port #{port}"
+    loop_acceptor socket
   end
 
   defp loop_acceptor(socket) do
-    {:ok, client} = :gen_tcp.accept(socket)
-    Logger.info(Port.info(client))
-    {:ok, pid} = Task.Supervisor.start_child(Quick.TaskSupervisor, fn -> serve(client) end)
-    :ok = :gen_tcp.controlling_process(client, pid)
-    loop_acceptor(socket)
+    {:ok, client} = :gen_tcp.accept socket
+    client |> Port.info |> Logger.info
+    {:ok, pid} = Task.Supervisor.start_child Quick.TaskSupervisor, fn -> serve client end
+    :ok = :gen_tcp.controlling_process client, pid
+    loop_acceptor socket
   end
 
   defp serve(socket) do
     socket
-    |> read_line()
+    |> read_line
 #   |> write_line(socket)
 
-    serve(socket)
+    serve socket
   end
 
   defp read_line(socket) do
-    {:ok, data} = :gen_tcp.recv(socket, 0)
-    Logger.info(data)
+    {:ok, data} = :gen_tcp.recv socket, 0
+    Logger.info data
     data
   end
 
 #  defp write_line(line, socket) do
-#    :gen_tcp.send(socket, line)
+#    :gen_tcp.send socket, line
 #  end
+
+  defp dispatch() do
+    [
+      {
+        :_,
+        [
+          {"/socket", Quick.SocketHandler, []},
+          {:_, Plug.Cowboy.Handler, {Quick.Router, []}}
+        ]
+      }
+    ]
+  end
 end
