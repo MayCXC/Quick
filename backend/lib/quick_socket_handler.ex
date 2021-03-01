@@ -4,11 +4,11 @@ defmodule Quick.SocketHandler do
   require Logger
 
   def init(request, state) do
-    {:cowboy_websocket, request, state}
+    {:cowboy_websocket, request, Map.merge(state, %{request_path: request.path})}
   end
 
   def websocket_init(state) do
-    Logger.info "Self: #{inspect(self())}"
+    {:ok, _} = Registry.SocketHandler |> Registry.register(state.request_path, {})
     {:ok, state}
   end
 

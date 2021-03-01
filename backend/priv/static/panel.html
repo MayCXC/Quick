@@ -8,7 +8,7 @@ webSocket.onmessage = function(e) {
     console.log(e.data);
 }
 webSocket.onopen = function() {
-    webSocket.send("bblabla");
+    webSocket.send(Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15));
 }
 </script>
 </head>

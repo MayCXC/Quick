@@ -20,10 +20,16 @@ defmodule Quick do
           scheme: :http,
           plug: nil,
           options: [port: 8080, dispatch: dispatch()]
+        ),
+        Registry.child_spec(
+          keys: :duplicate,
+          name: Registry.SocketHandler
         )
       ],
-      strategy: :one_for_one,
-      name: Quick.Supervisor
+      [
+        strategy: :one_for_one,
+        name: Quick.Supervisor
+      ]
     )
   end
 
@@ -57,6 +63,7 @@ defmodule Quick do
     socket
     |> read_line
 #   |> write_line(socket)
+    |> write_line_ws("/socket")
 
     serve socket
   end
@@ -67,16 +74,24 @@ defmodule Quick do
     data
   end
 
-#  defp write_line(line, socket) do
-#    :gen_tcp.send socket, line
-#  end
+# defp write_line(line, socket) do
+#   :gen_tcp.send socket, line
+# end
+  defp write_line_ws(line, ws) do
+    Logger.info "Registry: #{inspect(Registry.lookup(Registry.SocketHandler, ws))}"
+    Registry.dispatch Registry.SocketHandler, ws, fn(entries) ->
+      for {pid, _} <- entries do
+        Process.send pid, line, []
+      end
+    end
+  end
 
   defp dispatch() do
     [
       {
         :_,
         [
-          {"/socket", Quick.SocketHandler, []},
+          {"/socket", Quick.SocketHandler, %{}},
           {:_, Plug.Cowboy.Handler, {Quick.Router, []}}
         ]
       }
