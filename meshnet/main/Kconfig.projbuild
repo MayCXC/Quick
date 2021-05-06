@@ -2,13 +2,13 @@ menu "Example Configuration"
 
 config ROUTER_SSID
     string "Router SSID"
-        default "ROUTER_SSID"
+        default "my-ssid"
         help
             Router SSID.
 
 config ROUTER_PASSWORD
     string "Router password"
-        default "ROUTER_PASSWORD"
+        default "my-password"
         help
             Router password.
 
@@ -25,16 +25,10 @@ config MESH_PASSWORD
     help
         Mesh AP password. Password length must be 8 bits smaller than 64 bits,Set to null to not encrypt
 
-config SERVER_IP
-    string "Server IP address"
-        default "192.168.0.1"
-        help
-            Server IP address.
-
-config SERVER_PORT
-    int "Server port"
-        default "8070"
-        help
-            Server port.
+config MQTT_URL
+    string "MQTT broker URL"
+    default "mqtt://iot.eclipse.org"
+    help
+        URL of the broker to connect to
 
 endmenu

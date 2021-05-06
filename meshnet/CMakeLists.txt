@@ -4,4 +4,4 @@ cmake_minimum_required(VERSION 3.5)
 
 include($ENV{MDF_PATH}/project.cmake)
 
-project(router)
+project(mqtt_example)
