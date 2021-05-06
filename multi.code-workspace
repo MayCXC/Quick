@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "backend"
+		},
+		{
+			"path": "frontend"
 		}
 	],
 	"settings": {
@@ -13,6 +16,12 @@
 			"interface/ftdi/esp32_devkitj_v1.cfg",
 			"target/esp32.cfg"
 		],
-		"idf.portWin": "COM10"
+		"idf.portWin": "COM10",
+		"idf.espMdfPath": "/home/nameuser/esp/esp-idf/tools/esp-mdf",
+		"idf.flashType": "JTAG",
+		"idf.port": "/dev/ttyUSB0",
+		"files.associations": {
+			"mdf_common.h": "c"
+		}
 	}
 }

@@ -1,7 +1,5 @@
 # Quick
 
-**TODO: Add description**
-
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
@@ -19,3 +17,5 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/quick](https://hexdocs.pm/quick).
 
+# `idf.py` might fail to build if the repo timestamps are less than two days old!
+`find . -exec touch -d "2 days ago" {} +`
