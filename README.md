@@ -17,3 +17,5 @@ protocol websockets
 
 ## `idf.py build` might fail if your clone of this repo is less than two days old!
 ninja will get stuck in an endless build loop because it uses timestamps to find dirty targets, but apparently not with sub 24-hour resolution. Be sure to run `find . -exec touch -d "2 days ago" {} +` after `git clone https://github.com/mayhd3/Quick.git` and before `idf.py build`.
+
+Flashing may fail if serial ports are busy, try `sudo systemctl stop serial-getty@USB0.service` if you get "device reports readiness to read but returned no data" errors.

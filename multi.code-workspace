@@ -1,13 +1,7 @@
 {
 	"folders": [
 		{
-			"path": "meshnet"
-		},
-		{
-			"path": "backend"
-		},
-		{
-			"path": "frontend"
+			"path": "."
 		}
 	],
 	"settings": {
