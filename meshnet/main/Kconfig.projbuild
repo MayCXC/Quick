@@ -1,34 +1,36 @@
 menu "Example Configuration"
+    config EXAMPLE_DUMP_ADV_DATA_AND_SCAN_RESP
+        bool "Dump whole adv data and scan response data in example"
+        default n
 
-config ROUTER_SSID
-    string "Router SSID"
-        default "my-ssid"
+    config ROUTER_SSID
+        string "Router SSID"
+            default "my-ssid"
+            help
+                Router SSID.
+    
+    config ROUTER_PASSWORD
+        string "Router password"
+            default "my-password"
+            help
+                Router password.
+    
+    config MESH_ID
+        string "Mesh ID"
+            default "123456"
+            help
+                Mesh network identification, Nodes with the same mesh ID can
+                communicate with each other.
+    
+    config MESH_PASSWORD
+        string "Mesh Password"
+        default "MESH_PASSWORD"
         help
-            Router SSID.
-
-config ROUTER_PASSWORD
-    string "Router password"
-        default "my-password"
+            Mesh AP password. Password length must be 8 bits smaller than 64 bits,Set to null to not encrypt
+    
+    config MQTT_URL
+        string "MQTT broker URL"
+        default "mqtt://iot.eclipse.org"
         help
-            Router password.
-
-config MESH_ID
-    string "Mesh ID"
-        default "123456"
-        help
-            Mesh network identification, Nodes with the same mesh ID can
-            communicate with each other.
-
-config MESH_PASSWORD
-    string "Mesh Password"
-    default "MESH_PASSWORD"
-    help
-        Mesh AP password. Password length must be 8 bits smaller than 64 bits,Set to null to not encrypt
-
-config MQTT_URL
-    string "MQTT broker URL"
-    default "mqtt://iot.eclipse.org"
-    help
-        URL of the broker to connect to
-
+            URL of the broker to connect to
 endmenu

@@ -5,4 +5,6 @@
 
 PROJECT_NAME := $(notdir $(shell pwd))
 
+COMPONENT_ADD_INCLUDEDIRS := components/include
+
 include $(MDF_PATH)/project.mk
