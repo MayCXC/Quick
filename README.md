@@ -16,4 +16,4 @@ protocol websockets
 ```
 
 ## `idf.py build` might fail if your clone of this repo is less than two days old!
-ninja will get stuck in an endless build loop because it uses timestamps to find dirty targets, apparently without sub 24-hour resolution. Be sure to run `find . -exec touch -d "2 days ago" {} +` after `git clone https://github.com/mayhd3/Quick.git` and before `idf.py build`.
+ninja will get stuck in an endless build loop because it uses timestamps to find dirty targets, but apparently not with sub 24-hour resolution. Be sure to run `find . -exec touch -d "2 days ago" {} +` after `git clone https://github.com/mayhd3/Quick.git` and before `idf.py build`.
