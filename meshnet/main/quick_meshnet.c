@@ -191,7 +191,7 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
         case MDF_EVENT_MWIFI_PARENT_DISCONNECTED:
             MDF_LOGI("Parent is disconnected on station interface");
 
-            if (esp_mesh_is_root()) {
+            if (esp_mesh_is_root() && mesh_mqtt_is_connect()) {
                 mesh_mqtt_stop();
             }
 
@@ -360,7 +360,7 @@ static void esp_gap_cb(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *par
                                 esp_mesh_get_parent_bssid(&parent_mac);
                                 size = asprintf(
                                     &data,
-                                    "{\"type\":\"delta\", \"mac\": \"%02x%02x%02x%02x%02x%02x\", \"bda\":\"%02x%02x%02x%02x%02x%02x\",\"rssi\":%d}",
+                                    "{\"type\":\"delta\", \"observer\": \"%02x%02x%02x%02x%02x%02x\", \"broadcaster\":\"%02x%02x%02x%02x%02x%02x\",\"rssi\":%d}",
                                     MAC2STR(sta_mac), MAC2STR(bda_mac), new_rssi
                                 );
 
