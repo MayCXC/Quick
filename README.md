@@ -24,7 +24,7 @@ protocol websockets
 ## `idf.py build` might fail if your clone of this repo is too young!
 `ninja` will get stuck in an endless build loop because it uses timestamps to find dirty targets, but apparently not with sub 24-hour resolution. Be sure to run `find . -exec touch -d "2 days ago" {} +` after `git clone` and before `idf.py build`.
 
-Flashing might fail if serial ports are busy, try `sudo systemctl stop serial-getty@USB0.service` if you get `device reports readiness to read but returned no data` errors.
+Flashing and monitoring might fail if serial ports are busy, try `sudo systemctl stop serial-getty@USB0.service` if you get `device reports readiness to read but returned no data` errors.
 
 The backend uses [gen_tcp](https://elixir-lang.org/getting-started/mix-otp/task-and-gen-tcp.html) and [Plug.Cowboy](https://github.com/elixir-plug/plug_cowboy), start it with `mix run` and open `http://127.0.0.1:8080/panel.html`. The backend does not need to be running to see MQTT messages.
 
