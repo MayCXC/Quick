@@ -3,7 +3,7 @@
 * backend using [elixir](https://github.com/elixir-lang/elixir)
 * frontend using [Eclipse Paho](https://www.eclipse.org/paho/index.php?page=clients/js/index.php)
 
-### Setup
+## Setup
 Install [esp-mdf](https://github.com/espressif/esp-mdf) and the [Espressif IDF](https://marketplace.visualstudio.com/items?itemName=espressif.esp-idf-extension) VS Code extension. Ignore the "Welcome to the extension setup" page, instead open the command pallette and select `ESP-IDF: Configure Paths` > `IDF_PATH` > `${env:HOME}/esp/esp-mdf/esp-idf/`, this avoids downloading `esp-idf` twice.
 
 To set up the MQTT connection, open a terminal in the workspace and type `. ~/esp/esp-mdf/export.sh`, and then `idf.py menuconfig` > `Example Configuration` > `MQTT broker URL` > `mqtt://0.0.0.0:1883`, replacing `0.0.0.0` with the internal address of your server. You can also set the network SSID and password here, the defaults are `QuickTest` and `Testing123`. It is easy to set up an MQTT broker like [Mosquitto](https://mosquitto.org/), here is a basic config that connects it to the frontend:
@@ -30,10 +30,10 @@ The backend uses [gen_tcp](https://elixir-lang.org/getting-started/mix-otp/task-
 
 The frontend can be opened in a browser as-is.
 
-### Demos
+## Demos
 Parts [1](https://drive.google.com/file/d/1RUB25v0KZ8gKf_x0r_MXZNGIfBAjof6k/view?usp=sharing) and [2](https://drive.google.com/file/d/17djVrHJW8_8Fp9lnTQ7tsjYYEkwgC1B4/view?usp=sharing).
 
-### Todos
+## Todos
 * Less redundant message formats, right now the nodes publish nested JSONs that can include their MAC address twice.
 * Better multithreading than FreeRTOS tasks, ideally bluetooth scan results should be added to a shared queue from one thread and published to MQTT from another.
 * Cool interactive canvas visuals for the frontend. 
