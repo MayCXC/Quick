@@ -24,6 +24,6 @@
 			"mdf_common.h": "c",
 			"mesh_mqtt_handle.h": "c"
 		},
-		"idf.espIdfPath": "/home/nameuser/esp/esp-mdf/esp-idf"
+		"idf.espIdfPath": "${env:HOME}/esp/esp-mdf/esp-idf/"
 	}
 }
