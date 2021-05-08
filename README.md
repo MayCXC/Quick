@@ -18,7 +18,7 @@ protocol websockets
  Each node will publish bluetooth information and network topology changes to the broker:
 
 `mosquitto_sub -h localhost -t "mesh/+/toCloud"`
-through
+
 `mosquitto_sub -h localhost -t "mesh/+/topo"`
 
 ## `idf.py build` might fail if your clone of this repo is too young!
