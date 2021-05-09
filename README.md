@@ -4,7 +4,7 @@
 * frontend using [Eclipse Paho](https://www.eclipse.org/paho/index.php?page=clients/js/index.php)
 
 ## Setup
-Install [esp-mdf](https://github.com/espressif/esp-mdf) and the [Espressif IDF](https://marketplace.visualstudio.com/items?itemName=espressif.esp-idf-extension) VS Code extension. Ignore the "Welcome to the extension setup" page, instead open the command pallette and select `ESP-IDF: Configure Paths` > `IDF_PATH` > `${env:HOME}/esp/esp-mdf/esp-idf/`, this avoids downloading `esp-idf` twice.
+Install [esp-mdf](https://github.com/espressif/esp-mdf) and the [Espressif IDF](https://marketplace.visualstudio.com/items?itemName=espressif.esp-idf-extension) VS Code extension. Ignore the "Welcome to the extension setup" page, instead open the command palette and select `ESP-IDF: Configure Paths` > `IDF_PATH` > `${env:HOME}/esp/esp-mdf/esp-idf/`, this avoids downloading `esp-idf` twice.
 
 To set up the pub/sub connection, open a terminal in the workspace and enter `. ~/esp/esp-mdf/export.sh`, then select `idf.py menuconfig` > `Example Configuration` > `MQTT broker URL` > `mqtt://0.0.0.0:1883`, replacing `0.0.0.0` with the address of your MQTT broker. You can also set the network SSID and password from this menu, the defaults are `QuickTest` and `Testing123`. Finally, you can run a broker like [Mosquitto](https://mosquitto.org/) on the same network, here is a basic config that also connects it to the frontend:
 
