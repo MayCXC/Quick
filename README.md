@@ -1,7 +1,7 @@
 # Quick
-* meshnet using [esp-mdf](https://github.com/espressif/esp-mdf)
 * backend using [elixir](https://github.com/elixir-lang/elixir)
 * frontend using [Eclipse Paho](https://www.eclipse.org/paho/index.php?page=clients/js/index.php)
+* meshnet using [esp-mdf](https://github.com/espressif/esp-mdf)
 
 ## Setup
 Install [esp-mdf](https://github.com/espressif/esp-mdf) and the [Espressif IDF](https://marketplace.visualstudio.com/items?itemName=espressif.esp-idf-extension) VS Code extension. Ignore the "Welcome to the extension setup" page, instead open the command palette and select `ESP-IDF: Configure Paths` > `IDF_PATH` > `${env:HOME}/esp/esp-mdf/esp-idf/`, this avoids downloading `esp-idf` twice.
