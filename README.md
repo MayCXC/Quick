@@ -28,7 +28,7 @@ Flashing and monitoring might fail if serial ports are busy, try `sudo systemctl
 
 The backend uses [gen_tcp](https://elixir-lang.org/getting-started/mix-otp/task-and-gen-tcp.html) and [Plug.Cowboy](https://github.com/elixir-plug/plug_cowboy), start it with `mix run` and open `http://127.0.0.1:8080/panel.html`. The backend does not need to be running to use pub/sub messages.
 
-The frontend can be opened in a browser as-is.
+The frontend may be opened in a browser as-is.
 
 ## Demos
 Parts [1](https://drive.google.com/file/d/1RUB25v0KZ8gKf_x0r_MXZNGIfBAjof6k/view?usp=sharing) and [2](https://drive.google.com/file/d/17djVrHJW8_8Fp9lnTQ7tsjYYEkwgC1B4/view?usp=sharing).
